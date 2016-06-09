@@ -4,7 +4,7 @@ This software uses the Natural Language Toolkit (NLTK). To download this, visit:
 
 This software runs the Jiang-Conrath Similarity algorithm which “returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input Synsets.” You can find out more about this and other similarity tests at: http://www.nltk.org/howto/wordnet.html.
 
-WARNING: This file is dependent on other packages supported only for WordNet 3.0. They will not work with any other version of Wordnet.
+WARNING: This file is dependent on other packages supported only for WordNet 3.0. They will not work with any other version of WordNet.
 
 This software takes two input files, compares the two line-by-line, and outputs the degree of similarity of the lines onto a new file. 
 
@@ -12,3 +12,7 @@ To use this, run the Python interactive mode. Create a new Compare Object, which
 
 EXAMPLE:
 Compare(‘input1.txt’, ‘input2.txt’).compare()
+
+
+
+Date of Last Update: June 9, 2016 by SS
