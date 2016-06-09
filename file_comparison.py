@@ -35,7 +35,7 @@ class Compare:
                 a = wn.synsets(line)[0]
                 b = wn.synsets(line2)[0]
 
-                #Comparison uses Jiang-Conrath Similarity (JCN Similarity)
+
                 """
                 ***IMPORTANT***
                 Comparison uses IC from ic-brown.dat, but also supports
@@ -43,6 +43,8 @@ class Compare:
                 brown comparison and uncomment the second.
 
                 """
+                #Comparison uses Jiang-Conrath Similarity (JCN Similarity)
+
                 #BROWN_IC
                 comparison = str(round(a.jcn_similarity(b, brown_ic), 4)) #Using ic-brown.dat
 
@@ -52,7 +54,7 @@ class Compare:
                 out = open("output.txt", "a")
                 out.write(str(a.lemmas()[0].name()) + "," + str(b.lemmas()[0].name()) + ": " + comparison + "\n")
 
-        print("***Comparison completed. Results recorded in output.txt.***")
+        print("***COMPARISON COMPLETED: Results recorded in output.txt***")
 
 
 
@@ -83,11 +85,11 @@ class Compare:
 #
 # fo = open("foo.txt", "wb")
 # x = "hello"
-# y = "Sumukh"
+# y = "World"
 # fo.write( x + "," +"\n" + y);
 
 
-# with open("test.txt", "r") as ins:
+# with open("input.txt", "r") as ins:
 #     array = []
 #     for line in ins:
 #         array.append(line)
