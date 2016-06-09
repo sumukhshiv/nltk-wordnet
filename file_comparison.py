@@ -4,7 +4,7 @@ from decimal import Decimal
 
 class Compare:
     def __init__(self, file1, file2):
-        #Initialized using file names (Strings)
+        #Initialized using file names (String Format)
         self.file1 = file1
         self.file2 = file2
 
