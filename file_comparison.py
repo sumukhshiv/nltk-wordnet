@@ -28,8 +28,8 @@ class Compare:
             for line2 in g_lines:
 
                 #Currently supports only one word lines
-                line = line.rstrip('\n')
-                line2 = line2.rstrip('\n')
+                line = line.rstrip('\r\n')
+                line2 = line2.rstrip('\r\n')
 
                 #Utilizes primary (most common) meaning of the word
                 a = wn.synsets(line)[0]
