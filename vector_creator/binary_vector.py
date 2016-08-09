@@ -35,7 +35,11 @@ def vector_creator(file1, file2):
 
     #writes it out to output.txt
     for i in range(0,len(matrix)):
-        out.write(str(i) + ": " + str(matrix[i]) + "\n" + "\n")
+        out.write(str(i) + ": ")
+        for x in matrix[i]:
+            out.write(str(x) + " ")
+        out.write(" \n")
+
 
 
 
