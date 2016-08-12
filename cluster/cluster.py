@@ -58,11 +58,16 @@ def cluster(file):
     while i < n_clusters_:
         output_arr.append([])
         i += 1
+    labels_list = labels.tolist()
+    print labels_list
 
-    print(af)
-    print(cluster_centers_indices)
-    print(labels)
-    print(len(labels))
+    index = 0
+    for x in labels_list:
+        output_arr[x].append(index)
+        index += 1
+
+
+    print(labels_list)
     print(output_arr)
 
 
