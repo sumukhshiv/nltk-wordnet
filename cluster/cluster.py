@@ -6,72 +6,78 @@ from itertools import cycle
 
 def cluster(file):
     f = open(file, 'r')
+    g = open('objects.txt', 'r')
     fo = open('cluster.txt', 'w').close()
+    fo = open('cluster_words.txt', 'w').close()
 
+####### FILE PARSING #######
     f_lines = f.readlines()
+    g_lines = g.readlines()
+
     for index, line in enumerate(f_lines):
         f_lines[index] = line.rstrip()
+
+    for index, line in enumerate(g_lines):
+        g_lines[index] = line.rstrip('\r\n')
 
     for index, line in enumerate(f_lines):
         f_lines[index] = line.split()
 
-
-
     w, h = len(f_lines[0]) - 1, len(f_lines)
     matrix = [[0 for x in range(w)] for y in range(h)]
 
-    # print f_lines
-    # print matrix
-    # print len(f_lines)
-    # print len(matrix)
-    # print len(matrix[0])
-
     for i in range(0,len(matrix)):
         matrix[i] = f_lines[i][2:]
+####### END FILE PARSING #######
 
-    # print (f_lines[0])
-
-
-    # z = hac.linkage(matrix)
-    # print z
-
+####### DATA CLUSTERING #######
     X = met.pairwise_distances(matrix)
-    af = AffinityPropagation().fit(X)
+    af = AffinityPropagation(preference=-100).fit(X)
     cluster_centers_indices = af.cluster_centers_indices_
     labels = af.labels_
 
     n_clusters_ = len(cluster_centers_indices)
 
-    print('Estimated number of clusters: %d' % n_clusters_)
-    # print("Homogeneity: %0.3f" % met.homogeneity_score(labels_true, labels))
-    # print("Completeness: %0.3f" % met.completeness_score(labels_true, labels))
-    # print("V-measure: %0.3f" % met.v_measure_score(labels_true, labels))
-    # print("Adjusted Rand Index: %0.3f"
-    #       % met.adjusted_rand_score(labels_true, labels))
-    # print("Adjusted Mutual Information: %0.3f"
-    #       % met.adjusted_mutual_info_score(labels_true, labels))
-    # print("Silhouette Coefficient: %0.3f"
-    #       % met.silhouette_score(X, labels, metric='sqeuclidean'))
+    # print('Estimated number of clusters: %d' % n_clusters_)
+####### END DATA CLUSTERING #######
 
+
+####### OUTPUT ARRAY #######
     i = 0
     output_arr = []
     while i < n_clusters_:
         output_arr.append([])
         i += 1
     labels_list = labels.tolist()
-    print labels_list
 
     index = 0
     for x in labels_list:
         output_arr[x].append(index)
         index += 1
 
+    # print(labels_list)
+    # print(output_arr)
+####### END OUTPUT ARRAY #######
 
-    print(labels_list)
-    print(output_arr)
+
+####### FILE OUTPUT #######
+    out = open("cluster.txt", "a")
+    out2 = open("cluster_words.txt", "a")
+    for x in output_arr:
+        out.write(str(output_arr.index(x)) + " : ") # extra info -- " (" + str(len(x)) + " elements)"+
+        out2.write(str(output_arr.index(x)) + " : ")
+        for elem in x:
+            out.write(str(elem) + " ")
+            out2.write(g_lines[elem] + " ")
+        out.write("\n")
+        out2.write("\n")
 
 
+    # print output_arr
+####### END FILE OUTPUT #######
 
+
+####### DATA PLOTTING #######
     # plt.close('all')
     # plt.figure(1)
     # plt.clf()
@@ -88,6 +94,8 @@ def cluster(file):
     #
     # plt.title('Estimated number of clusters: %d' % n_clusters_)
     # plt.show()
-    # out = open("cluster.txt", "a")
+####### END DATA PLOTTING #######
+
+print('*** Clustering Completed! Output recorded in cluster.txt. Output with object names recorded in cluster_words.txt. ***')
 
 cluster('report.txt')
