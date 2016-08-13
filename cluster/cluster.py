@@ -29,10 +29,11 @@ def cluster(file):
     for i in range(0,len(matrix)):
         matrix[i] = f_lines[i][2:]
 ####### END FILE PARSING #######
-
+    # print matrix
 ####### DATA CLUSTERING #######
     X = met.pairwise_distances(matrix)
-    af = AffinityPropagation(preference=-100).fit(X)
+    print X
+    af = AffinityPropagation(preference=-0.005,verbose=True).fit(X)
     cluster_centers_indices = af.cluster_centers_indices_
     labels = af.labels_
 
@@ -68,7 +69,7 @@ def cluster(file):
         out2.write(str(output_arr.index(x)) + " : ")
         for elem in x:
             out.write(str(elem) + " ")
-            out2.write(g_lines[elem] + " ")
+            out2.write(g_lines[elem] + ", ")
         out.write("\n")
         out2.write("\n")
 
@@ -98,4 +99,4 @@ def cluster(file):
 
 print('*** Clustering Completed! Output recorded in cluster.txt. Output with object names recorded in cluster_words.txt. ***')
 
-cluster('report.txt')
+cluster('test.txt')
